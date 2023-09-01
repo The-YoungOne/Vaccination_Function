@@ -46,7 +46,7 @@ namespace VaccinationFunction
             {
                 int personIndex = dummyData.FindIndex(personIndex => personIndex.id == idInt);
                 String responseMessage = "";
-                if (personIndex != -1)
+                if (personIndex == -1)
                 {
                     responseMessage = $"The ID entered in the URL does not exist in th database! Please try again with a different ID.";
                 }

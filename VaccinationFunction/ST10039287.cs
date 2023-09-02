@@ -26,7 +26,7 @@ namespace VaccinationFunction
             //dummy values saved to List of <T>
             dummyData.AddRange(new vaccineList[] {
 
-                new vaccineList(6085007902,"Steve Jobs",87,false,null),
+                new vaccineList(6085007902,"Leonie Muller",17,false,null),
                 new vaccineList(7453804830,"Lucian Young",19,true,"J&J"),
                 new vaccineList(5043707093,"Andre Adkins",23,true,"Pfizer")
             });
@@ -42,18 +42,25 @@ namespace VaccinationFunction
 
             //fetching 
             long idInt;
+            //checks if the id value is an integer
             if(long.TryParse(id, out idInt))
             {
+                //checks if the id value exists in the list
                 int personIndex = dummyData.FindIndex(personIndex => personIndex.id == idInt);
                 String responseMessage = "";
+
+                //if the id is not in the arraylist
                 if (personIndex == -1)
                 {
-                    responseMessage = $"The ID entered in the URL does not exist in th database! Please try again with a different ID.";
+                    responseMessage = $"The ID entered in the URL does not exist in th database! " +
+                        $"Please try again with a different ID.";
                 }
                 else
                 {
+                    //displays the user's info
                     responseMessage = $"ID: {dummyData[personIndex].id}\nFull Name: {dummyData[personIndex].fullName}" +
-                        $"\nAge: {dummyData[personIndex].age}\nVaccinated: {dummyData[personIndex].vaccinated}\nVaccine Name: {dummyData[personIndex].vaccineName}";
+                        $"\nAge: {dummyData[personIndex].age}\nVaccinated: " +
+                        $"{dummyData[personIndex].vaccinated}\nVaccine Name: {dummyData[personIndex].vaccineName}";
 
                 }
 
@@ -61,12 +68,13 @@ namespace VaccinationFunction
             }
             else
             {
-                string responseMessage = "Welcome to the COVID-19 vaccination site! To check the vaccination status of an individual, please enter their id at the end of the URL --> e.g: ?id=7453804830";
+                //default message to be shown
+                string responseMessage = "Welcome to the COVID-19 vaccination site! To check the vaccination " +
+                    "status of an individual, please enter their id at the end of the URL --> e.g: ?id=7453804830";
                 return new BadRequestObjectResult(responseMessage);
             }
         }//end of function
 
-        //checks the id entered in the URL
     }
 
     //class that stores all details of the vaccination clinic
